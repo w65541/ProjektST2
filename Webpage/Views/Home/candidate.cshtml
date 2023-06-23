@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Strona randkowa</title>
+	
+	<link rel="stylesheet" href="css/style1.css">
+	<link rel="stylesheet" href="css/style-navbar.css">
+	
+	
+	<style>
+		/* Dodatkowe style CSS */
+		
+	</style>
+</head>
+<body>
+
+	<!-- Nagłówek z nawigacją -->
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top"> <!--navbar-dark bg-dark-->
+		<a class="navbar-brand" href="index1.html">Strona Randkowa</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Strona główna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">O nas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Kontakt</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto" id="kontoUl" style="margin-right: 10%;">
+                <!-- > -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="align-content: center" href="#" id="brak" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Konto
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="mainprofile.html">Profil</a>
+                        <a class="dropdown-item" href="#">Ustawienia</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Wyloguj</a>
+                    </div>
+                </li>
+            </ul>
+		</div>
+	</nav>
+
+	<!-- Sekcja 2 Szukaj -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 section search-section">
+				<!--       <h2>Sekcja 2 Szukaj</h2> -->
+				<form class="form-inline">
+					<input class="form-control col-sm-12 col-md-10 col-lg-11" type="search" placeholder="Znajdź" aria-label="Search">
+					<button class="btn btn-outline-success my-12 my-sm-0" type="submit">Szukaj</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Pierwsza sekcja   -->
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<!--			<div class="col-md-4 section user-profile">
+						<h2>Twój Profil</h2>
+						<img src="images/ludek2.jpg" alt="Zdjęcie Profilowe">
+						<h4>Salvatore Ganacci</h4>
+						<p><b>Wiek:</b> 30</p>
+						<p><b>Miejscowość:</b> Rzeszów</p>
+						<p><b>Telefon:</b> 777 888 111</p>
+						<p><b>Hobby:</b> Sport, muzyka, podróże</p>
+						<p><b>Opis:</b> Kocham sport. Kocham muzykę. Kocham podróżować. Zwiedziłem całą Warszawę, Kraków, Rzeszów, Holandię i Belgię</p>
+					</div>
+		-->
+
+			<div class="col-md-4 section user-profile">
+				<h2>Profil Kandydata</h2>
+				<img src="images/ludek1.jpg" alt="Zdjęcie Profilowe">
+				<h4>Marka Zygmunta</h4>
+				<p><b>Wiek:</b> 30</p>
+				<p><b>Miejscowość:</b> Rzeszów</p>
+				<p><b>Telefon:</b> 777 888 111</p>
+				<p><b>Hobby:</b> Sport, muzyka, podróże</p>
+				<p><b>Opis:</b> Kocham sport. Kocham muzykę. Kocham podróżować. Zwiedziłem całą Warszawę, Kraków, Rzeszów, Holandię i Belgię</p>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="btn-group" role="group">
+                <button class="btn btn-lg mr-2" id="btnback" onclick="window.location.href = 'index1.html'">Wstecz</button>
+				<button class="btn btn-lg mr-2" id="btnyes">Dodaj</button>
+				<button class="btn btn-lg mr-2" id="btnno">Odrzuć</button>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Trzecia sekcja
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-6 section">
+				<h2>Sekcja 3</h2>
+				<p>Treść sekcji 3</p>
+			</div>
+		</div>
+	</div>
+
+
+		-->
+	<!-- Stopka -->
+	<footer class="text-light text-center py-4">
+		<p>Stopka strony</p>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

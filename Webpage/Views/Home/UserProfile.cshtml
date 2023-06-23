@@ -1,0 +1,143 @@
+@{
+    ViewData["Title"] = "UserProfile";
+}
+@using Storage
+@model Profil
+
+
+
+	<!-- Pierwsza sekcja   -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 section user-profile">
+				<h2>Twój Profil</h2>
+				<img src="images/ludek2.jpg" alt="Zdjęcie Profilowe">
+				<h4>@Model.Imie @Model.Nazwisko</h4>
+				<p><b>Płeć:</b> Mężczyzna</p>
+				<p><b>Telefon:</b>@Model.Telefon</p>
+			</div>
+
+            <div class="col-md-7">
+                <h2>Zmień dane</h2>
+                
+
+                    <div class="form-group">
+                        <label> Aktualne hasło: </label><br />
+                        <label for="newPassword">Nowe hasło:</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword">
+                    </div>
+                    <hr />
+
+
+                    <div class="form-group">
+                        <label> Aktualny email: @Model.Email </label><br />
+                        <label for="newEmail">Nowy adres e-mail:</label>
+                        <input type="email" class="form-control" id="newEmail" name="newEmail" >
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <label> Aktualne imie: @Model.Imie</label><br />
+                        <label for="Name">Imię:</label>
+                        <input type="text" class="form-control" id="Name" name="Name" >
+                    </div>
+
+                    <div class="form-group">
+                        <label> Aktualne nazwisko:</label><br />
+                        <label for="lastName">Nazwisko:</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" >
+                    </div>
+
+                    <div class="form-group">
+                        <label> Aktualna płeć:</label><br />
+                        <label for="gender">Płeć:</label>
+                        <select class="form-control" id="gender" name="gender" >
+                            <option value="" selected>Wybierz...</option>
+                            <option value="0">Mężczyzna</option>
+                            <option value="1">Kobieta</option>
+                        </select>
+                    </div>
+                    <p>Załaduj zdjęcie profilowe</p>
+                    <div class="form-group">
+                        <label for="photo">Zdjęcie:</label>
+                        <input type="file" class="form-control-file" id="photo" name="photo">
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <label for="a1">Ocena:</label>
+                        <select class="form-control" id="a1" name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="a2">Ocena:</label>
+                        <select class="form-control" id="a2" name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="a3">Ocena:</label>
+                        <select class="form-control" id="a3" name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="a4">Ocena:</label>
+                        <select class="form-control" id="a4" name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <button id="update">Wyślij</button>
+           
+                <script>
+                    document.getElementById("update").onclick = function () { test() };
+                    function test() {
+                        alert(document.getElementById("Name").value);
+        $.ajax({
+            type: "GET", dataType: 'json',
+            //url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
+            url:'@Url.Action("ProfileUpdate", "DatingSite")',
+            data: { id : @Model.Id , imie : document.getElementById("Name").value },
+
+            success: function () {
+                //do something with result here
+                alert(document.getElementById("Name").value);
+                //location.reload();
+            },
+        error: function () {
+                // Obsługa błędów
+            }
+        });
+    }
+                </script>
+
+
+            </div>
+		</div>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,0 +1,116 @@
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model int
+
+	<!-- Nagłówek z nawigacją -->
+	<!-- Sekcja 2 Szukaj -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 section search-section">
+				<!--       <h2>Sekcja 2 Szukaj</h2> -->
+				<form class="form-inline">
+					<input class="form-control col-sm-12 col-md-10 col-lg-11" type="search" placeholder="Znajdź" aria-label="Search">
+					<button class="btn btn-outline-success my-12 my-sm-0" type="submit">Szukaj</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Pierwsza sekcja   -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 section user-profile">
+				<h2>Twój Profil</h2>
+				<img src="images/ludek2.jpg" alt="Zdjęcie Profilowe">
+				<h4>Salvatore Ganacci</h4>
+				<p><b>Wiek:</b> 30</p>
+				<p><b>Miejscowość:</b> Rzeszów</p>
+				<p><b>Telefon:</b> 777 888 111</p>
+				<p><b>Hobby:</b> Sport, muzyka, podróże</p>
+				<p><b>Opis:</b> Kocham sport. Kocham muzykę. Kocham podróżować. Zwiedziłem całą Warszawę, Kraków, Rzeszów, Holandię i Belgię</p>
+			</div>
+
+
+			
+			<div class="col-md-8 section">
+				<h2 id="Kandydaci1">Kandydaci</h2>
+                
+                    <div class="card-container row" id="Kandydaci" onload="test()">
+
+
+						
+					
+					</div>
+                    
+
+                </div>
+
+
+		</>
+	</div>
+
+
+        <script>
+
+			document.addEventListener("DOMContentLoaded", function () { test() });
+        document.getElementById("Kandydaci1").onclick = function () { test() };
+		function test() {
+			$.ajax({
+				type: "GET", dataType: 'json',
+				//url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
+				url: '@Url.Action("ProfileCom", "DatingSite")',
+				data: { id: @Model},
+
+				success: function (result) {
+					var html = "";
+                    for (var i = 0; i < 1; i++) {
+                        html += '<div id = "rej' + result[i]['id'] +'"class="col-sm-6 col-md-4 col-lg-3 mb-4">';
+                        html += '<div class="card">';
+                        html += '<div class="square-img-wrapper">';
+						html += '<a href="candidate.html">';
+                        html += '<img src="images/ludek1.jpg" class="card-img-top img-fluid square-img" alt="..." />';
+                        html += '</a>';
+                        html += '</div>';
+                        html += '<div class="card-body p-0"> <p class="card-text ml-2 mr-2 mt-3 mb-3">';
+                        html += result[0]["imie"] + " " + result[0]["nazwisko"] +'</p>';
+                        html += '<button class="btn w-50" id="btnyes">Dodaj</button><button class="btn w-50" id="btnno" onClick="Reject('+result[i]['id']+')" > Odrzuć</button ></div ></div ></div ></div ></div >';
+                        document.getElementById("Kandydaci").innerHTML += html;
+					}
+
+		},
+		error: function () {
+            alert(result['imie']);
+		}
+				});
+		}
+
+			function Reject(Rid) {
+                var id = "rej" + Rid;
+                //do something with result here
+                document.getElementById(id).remove();
+
+        $.ajax({
+            type: "POST", dataType: 'json',
+            //url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
+            url:'@Url.Action("Reject", "DatingSite")',
+            data: { id1 : @Model, id2: Rid },
+
+			success: function () {
+				var id = "rej" + rid;
+                //do something with result here
+				document.getElementById(id).remove;
+            },
+        error: function () {
+			// Obsługa błędów
+			alert("nie");
+            }
+        });
+    }
+
+
+        </script>
