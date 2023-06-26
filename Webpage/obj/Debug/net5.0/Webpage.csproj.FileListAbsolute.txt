@@ -146,3 +146,5 @@ C:\Users\HP\Documents\Programowanie studia\ProjektST2\ProjektST2\Webpage\obj\Deb
 C:\Users\HP\Documents\Programowanie studia\ProjektST2\ProjektST2\Webpage\obj\Debug\net5.0\ref\Webpage.dll
 C:\Users\HP\Documents\Programowanie studia\ProjektST2\ProjektST2\Webpage\obj\Debug\net5.0\Webpage.pdb
 C:\Users\HP\Documents\Programowanie studia\ProjektST2\ProjektST2\Webpage\obj\Debug\net5.0\Webpage.genruntimeconfig.cache
+C:\Users\HP\Documents\Programowanie studia\ProjektST2\ProjektST2\Webpage\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
+C:\Users\HP\Documents\Programowanie studia\ProjektST2\ProjektST2\Webpage\obj\Debug\net5.0\Razor\Views\Home\Register.cshtml.g.cs

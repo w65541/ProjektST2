@@ -15,31 +15,46 @@ namespace Webpage.Controllers
         private readonly datingsiteContext _context;
         private readonly ILogger<HomeController> _logger;
         public int UserId;
-        public Profil User;
+        public Profil Userr;
         public HomeController(ILogger<HomeController> logger, datingsiteContext context)
         {
             _logger = logger;
             _context = context;
-            User = context.Profils.ToList().First();
         }
-
+        public IActionResult Login()
+        {
+            Userr = null;
+            return View();
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
-            return View(1);
+            return View(Userr);
         }
         public IActionResult UserProfile() 
         {
-            return View(User);
+            return View(Userr);
         }
-        public IActionResult Privacy()
+
+        [HttpGet]
+        public IActionResult Index(int id) {
+
+                Userr = _context.Profils.Where(x => x.IdUser == id).ToList().First();
+                return View(Userr);
+
+        }
+        [HttpGet]
+        public IActionResult UserProfile(int id)
         {
-            return View(UserId);
+
+            Userr = _context.Profils.Where(x => x.IdUser == id).ToList().First();
+            return View(Userr);
+
         }
-        [HttpPost]
-        public IActionResult Privacy(int id) {
-            UserId = id;
-            return View(UserId);
-        }
+       
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

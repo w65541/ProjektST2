@@ -2,60 +2,60 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@model int
-
-	<!-- Nagłówek z nawigacją -->
-	<!-- Sekcja 2 Szukaj -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-lg-12 section search-section">
-				<!--       <h2>Sekcja 2 Szukaj</h2> -->
-				<form class="form-inline">
-					<input class="form-control col-sm-12 col-md-10 col-lg-11" type="search" placeholder="Znajdź" aria-label="Search">
-					<button class="btn btn-outline-success my-12 my-sm-0" type="submit">Szukaj</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
+@using Storage
+@model Profil
+<!-- Nagłówek z nawigacją -->
+<!-- Sekcja 2 Szukaj -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 section search-section">
+            <!--       <h2>Sekcja 2 Szukaj</h2> -->
+            <form class="form-inline">
+                <input class="form-control col-sm-12 col-md-10 col-lg-11" type="search" placeholder="Znajdź" aria-label="Search">
+                <button class="btn btn-outline-success my-12 my-sm-0" type="submit">Szukaj</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 
-	<!-- Pierwsza sekcja   -->
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-4 section user-profile">
-				<h2>Twój Profil</h2>
-				<img src="images/ludek2.jpg" alt="Zdjęcie Profilowe">
-				<h4>Salvatore Ganacci</h4>
-				<p><b>Wiek:</b> 30</p>
-				<p><b>Miejscowość:</b> Rzeszów</p>
-				<p><b>Telefon:</b> 777 888 111</p>
-				<p><b>Hobby:</b> Sport, muzyka, podróże</p>
-				<p><b>Opis:</b> Kocham sport. Kocham muzykę. Kocham podróżować. Zwiedziłem całą Warszawę, Kraków, Rzeszów, Holandię i Belgię</p>
-			</div>
 
 
-			
-			<div class="col-md-8 section">
-				<h2 id="Kandydaci1">Kandydaci</h2>
-                
-                    <div class="card-container row" id="Kandydaci" onload="test()">
+<!-- Pierwsza sekcja   -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 section user-profile">
+            <h2>Twój Profil</h2>
+            <img src="images/ludek2.jpg" alt="Zdjęcie Profilowe">
+            <h4>Salvatore Ganacci</h4>
+            <p><b>Wiek:</b> 30</p>
+            <p><b>Miejscowość:</b> Rzeszów</p>
+            <p><b>Telefon:</b> 777 888 111</p>
+            <p><b>Hobby:</b> Sport, muzyka, podróże</p>
+            <p><b>Opis:</b> Kocham sport. Kocham muzykę. Kocham podróżować. Zwiedziłem całą Warszawę, Kraków, Rzeszów, Holandię i Belgię</p>
+        </div>
 
 
-						
-					
-					</div>
-                    
 
-                </div>
+        <div class="col-md-8 section">
+            <h2 id="Kandydaci1">Kandydaci</h2>
 
-
-		</>
-	</div>
+            <div class="card-container row" id="Kandydaci" onload="test()">
 
 
-        <script>
+
+
+            </div>
+
+
+        </div>
+
+
+        </>
+    </div>
+
+
+    <script>
 
 			document.addEventListener("DOMContentLoaded", function () { test() });
         document.getElementById("Kandydaci1").onclick = function () { test() };
@@ -64,7 +64,7 @@
 				type: "GET", dataType: 'json',
 				//url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
 				url: '@Url.Action("ProfileCom", "DatingSite")',
-				data: { id: @Model},
+				data: { id: @Model.Id},
 
 				success: function (result) {
 					var html = "";
@@ -98,7 +98,7 @@
             type: "POST", dataType: 'json',
             //url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
             url:'@Url.Action("Reject", "DatingSite")',
-            data: { id1 : @Model, id2: Rid },
+            data: { id1 : @Model.Id, id2: Rid },
 
 			success: function () {
 				var id = "rej" + rid;
@@ -113,4 +113,4 @@
     }
 
 
-        </script>
+    </script>

@@ -24,74 +24,92 @@ namespace Storage.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public List<Profil> Get()
-        {
-            Console.WriteLine("Połączone");
-            return _context.Profils.ToList();
-        }
 
-        [HttpGet("Login")]
+        [HttpGet("LoginUser")]
         public int GetId(string login,string password)
         {
-            Console.WriteLine("Połączone");
+            Console.WriteLine(login + " " + password);
             var temp = _context.Users.Where(x => x.Login.Equals(login) && x.Haslo.Equals(password)).ToList();
-            if (temp.Count > 0) return temp.First().Id;
+            if (temp.Count > 0)
+            {
+            int id=temp.First().Id;
+                Console.WriteLine(id);
+                return id;
+            }
+               
             return 0;
         }
 
         [HttpGet("ProfileGet")]
         public Profil GetProfil(int id)
         {
-            var temp = _context.Profils.Where(x => x.Id == id).ToList();
+            var temp = _context.Profils.Where(x => x.IdUser == id).ToList();
             if (temp.Count > 0) return temp.First();
             return null;
         }
 
 
 
-        [HttpPatch("ProfileDelete")]
-        public void DeleteProfile(int id)
+        [HttpGet("ProfileDelete")]
+        public int DeleteProfile(int id)
         {
             var temp=_context.Profils.Where(x => x.Id == id).ToList();
-            if(temp.Count>0) _context.Profils.Remove(temp.First());   
-                
+            if (temp.Count > 0) {
+                int temp2 = temp.First().IdUser;
+                _context.Rejections.RemoveRange(_context.Rejections.Where(x=>x.Rejectee==temp.First().Id).ToList());
+                _context.Profils.Remove(temp.First());
+                _context.Users.Remove(_context.Users.Where(x=>x.Id==temp2).ToList().First());  
+            
+            return 0;
+            }
+            return 1;
         }
 
-        [HttpPost("ProfileAdd")]
-        public void AddProfile( string imie = "", string nazwisko = "", string telefon = "", int a1 = 0, int a2 = 0, int a3 = 0, int a4 = 0)
+        [HttpGet("ProfileAdd")]
+        public int AddProfile(string login="",string haslo="", string imie = "", string nazwisko = "", string telefon = "", string email = "", sbyte plec = 2, int a1 = 0, int a2 = 0, int a3 = 0, int a4 = 0)
         {
-            _context.Profils.Add(new Profil { 
-            Imie = imie,
-            Nazwisko = nazwisko,
-            Telefon = telefon,
-            Atrybut1 = a1,
-            Atrybut2 = a2,
-            Atrybut3 = a3,
-            Atrybut4 = a4});
+            if (login.Length < 46 && haslo.Length < 46 && imie.Length < 46 && nazwisko.Length < 46 && telefon.Length == 9 && int.TryParse(telefon, out int ignore) && email.Contains('@') && email.Length < 46)
+            {
+            _context.Users.Add(new User { Login = login, Haslo = haslo });
+            _context.Profils.Add(new Profil {
+                IdUser = _context.Users.ToList().Last().Id,
+                Imie = imie,
+                Nazwisko = nazwisko,
+                Telefon = telefon,
+                Plec = plec,
+                Atrybut1 = a1,
+                Atrybut2 = a2,
+                Atrybut3 = a3,
+                Atrybut4 = a4 }) ;
             _context.SaveChanges();
+                return 0;
+            }
+            return 1;
         }
 
         [HttpGet("ProfileUpdate")]
-        public void UpdateProfile(int id,string imie="",string nazwisko="",string telefon="",string email="",int a1=0, int a2=0, int a3=0, int a4=0) { 
+        public int UpdateProfile(int id,string imie="",string nazwisko="",string telefon="",string email="",int a1=0,sbyte plec=2, int a2=0, int a3=0, int a4=0) { 
             var temp= _context.Profils.Where(x => x.Id == id).First();
-            if(imie!="")temp.Imie = imie;
-            if (nazwisko != "") temp.Nazwisko = nazwisko;
-            if (telefon != "") temp.Telefon = telefon;
-            if (email != "") temp.Email = email;
+            if(imie!=null && imie!= "" && imie.Length < 46) temp.Imie = imie;
+            if (nazwisko != null && nazwisko != "" && nazwisko.Length<46) temp.Nazwisko = nazwisko;
+            if (telefon != null && telefon != "" && telefon.Length==9 && int.TryParse(telefon,out int ignore)) temp.Telefon = telefon;
+            if (email != null && email != "" && email.Contains('@') && email.Length < 46) temp.Email = email;
+            if (plec != 2) temp.Plec = plec;
             if (a1 != 0) temp.Atrybut1 = a1;
             if (a2 != 0) temp.Atrybut2 = a2;
             if (a3 != 0) temp.Atrybut3 = a3;
             if (a4 != 0) temp.Atrybut4 = a4;
             Console.WriteLine(imie);
             _context.SaveChanges();
+            return 0;
         }
 
 
         [HttpPost("Reject")]
-        public void reject(int id1, int id2) {
+        public int reject(int id1, int id2) {
             _context.Rejections.Add(new Rejection{Rejectee=id1,Rejected=id2});
             _context.SaveChanges();
+            return 0;
         }
 
         [HttpGet("ProfileCom")]
