@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Webpage.Models;
-
+using Storage.Models;
 namespace Webpage.Controllers
 {
     public class HomeController : Controller
@@ -54,7 +54,11 @@ namespace Webpage.Controllers
             return View(Userr);
 
         }
-       
+        [HttpGet]
+        public IActionResult Profile(int id1, int id2,int id3) {
+            ProfileData temp = new ProfileData(_context.Profils.Where(x => x.Id == id2).ToList().First(),id1,id3);
+            return View(temp);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

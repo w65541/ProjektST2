@@ -24,7 +24,7 @@ namespace Storage.Controllers
             _context = context;
         }
 
-
+        //Funkcja zwraca id użytkownika przy poprawnym logowaniu
         [HttpGet("LoginUser")]
         public int GetId(string login,string password)
         {
@@ -40,6 +40,7 @@ namespace Storage.Controllers
             return 0;
         }
 
+        //Zwraca profil użytkownia o podanym UserId
         [HttpGet("ProfileGet")]
         public Profil GetProfil(int id)
         {
@@ -49,7 +50,7 @@ namespace Storage.Controllers
         }
 
 
-
+        //Usuwa wszystko związane z danym użytkownikiem o podannym id
         [HttpGet("ProfileDelete")]
         public int DeleteProfile(int id)
         {
@@ -64,7 +65,7 @@ namespace Storage.Controllers
             }
             return 1;
         }
-
+        //dodaje nowego użytkownika
         [HttpGet("ProfileAdd")]
         public int AddProfile(string login="",string haslo="", string imie = "", string nazwisko = "", string telefon = "", string email = "", sbyte plec = 2, int a1 = 0, int a2 = 0, int a3 = 0, int a4 = 0)
         {
@@ -86,25 +87,30 @@ namespace Storage.Controllers
             }
             return 1;
         }
-
+        //Aktualizuje dane użytkownika o podanym id
         [HttpGet("ProfileUpdate")]
-        public int UpdateProfile(int id,string imie="",string nazwisko="",string telefon="",string email="",int a1=0,sbyte plec=2, int a2=0, int a3=0, int a4=0) { 
-            var temp= _context.Profils.Where(x => x.Id == id).First();
-            if(imie!=null && imie!= "" && imie.Length < 46) temp.Imie = imie;
-            if (nazwisko != null && nazwisko != "" && nazwisko.Length<46) temp.Nazwisko = nazwisko;
-            if (telefon != null && telefon != "" && telefon.Length==9 && int.TryParse(telefon,out int ignore)) temp.Telefon = telefon;
-            if (email != null && email != "" && email.Contains('@') && email.Length < 46) temp.Email = email;
-            if (plec != 2) temp.Plec = plec;
-            if (a1 != 0) temp.Atrybut1 = a1;
-            if (a2 != 0) temp.Atrybut2 = a2;
-            if (a3 != 0) temp.Atrybut3 = a3;
-            if (a4 != 0) temp.Atrybut4 = a4;
-            Console.WriteLine(imie);
-            _context.SaveChanges();
-            return 0;
+        public int UpdateProfile(int id,string imie="",string nazwisko="",string telefon="",string email="",int a1=0,sbyte plec=2, int a2=0, int a3=0, int a4=0) {
+            var temp = _context.Profils.Where(x => x.Id == id).ToList();
+            if (temp.Count > 0)
+            {
+                var temp2 = temp.First();
+                if (imie != null && imie != "" && imie.Length < 46) temp2.Imie = imie;
+                if (nazwisko != null && nazwisko != "" && nazwisko.Length < 46) temp2.Nazwisko = nazwisko;
+                if (telefon != null && telefon != "" && telefon.Length == 9 && int.TryParse(telefon, out int ignore)) temp2.Telefon = telefon;
+                if (email != null && email != "" && email.Contains('@') && email.Length < 46) temp2.Email = email;
+                if (plec != 2) temp2.Plec = plec;
+                if (a1 != 0) temp2.Atrybut1 = a1;
+                if (a2 != 0) temp2.Atrybut2 = a2;
+                if (a3 != 0) temp2.Atrybut3 = a3;
+                if (a4 != 0) temp2.Atrybut4 = a4;
+                Console.WriteLine(imie);
+                _context.SaveChanges();
+                return 0;
+            }
+            return 1;
         }
 
-
+        //dodaje do odrzuconych danego użytkownika odrzucanego o podanym id
         [HttpGet("Reject")]
         public int Reject(int id1, int id2) {
             _context.Rejections.Add(new Rejection{Rejectee=id1,Rejected=id2});
@@ -112,6 +118,8 @@ namespace Storage.Controllers
             return 0;
         }
 
+
+        //Zwraca listę kandytatów posortowną po największej kompatybilności
         [HttpGet("ProfileCom")]
         public List<Profil> PotencjalneProfile(int id=1)
         {

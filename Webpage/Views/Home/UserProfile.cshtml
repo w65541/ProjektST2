@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "UserProfile";
+    ViewData["Title"] = "Edit Profile";
 }
 @using Storage
 @model Profil
@@ -9,13 +9,17 @@
 	<!-- Pierwsza sekcja   -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-4 section user-profile">
-				<h2>Twój Profil</h2>
-				<img src="~/images/ludek2.jpg" alt="Zdjęcie Profilowe">
-				<h4>@Model.Imie @Model.Nazwisko</h4>
-				<p><b>Płeć:</b> Mężczyzna</p>
-				<p><b>Telefon:</b>@Model.Telefon</p>
-			</div>
+            <div class="col-md-4 section user-profile">
+                <h2>Twój Profil</h2>
+                <img src="~/images/ludek2.jpg" alt="Zdjęcie Profilowe">
+                <h4>@Model.Imie @Model.Nazwisko</h4>
+                @if (@Model.Plec == 0)
+                {
+            <p><b>Płeć:</b> Mężczyzna</p>}
+        else
+        {<p><b>Płeć:</b> Kobieta</p>}
+                <p><b>Telefon:</b>@Model.Telefon</p>
+            </div>
 
             <div class="col-md-7">
                 <h2>Zmień dane</h2>
@@ -124,11 +128,12 @@
                 <script>
                     document.getElementById("update").onclick = function () { update() };
                     document.getElementById("del").onclick = function () { del() };
+
+                   
                     function update() {
 
         $.ajax({
             type: "GET", dataType: 'json',
-            //url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
             url:'@Url.Action("ProfileUpdate", "DatingSite")',
             data: { id: @Model.Id,
                 login: document.getElementById("login").value, haslo: document.getElementById("newPassword").value, imie: document.getElementById("Name").value,
@@ -136,19 +141,15 @@
             a1: document.getElementById("a1").value, a2: document.getElementById("a2").value, a3: document.getElementById("a3").value, a4: document.getElementById("a4").value
         },
             success: function () {
-                //do something with result here
+               
 
                 location.reload();
-            },
-        error: function () {
-                // Obsługa błędów
-            }
+            },        
         });
                     }
                     function del() {
                         $.ajax({
-                            type: "GET", dataType: 'json',
-                            //url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
+                            type: "GET", dataType: 'json',                            
                             url: '@Url.Action("ProfileDelete", "DatingSite")',
                             data: { id: @Model.Id},
                             success: function () {
