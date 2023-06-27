@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-4 section user-profile">
 				<h2>Twój Profil</h2>
-				<img src="images/ludek2.jpg" alt="Zdjęcie Profilowe">
+				<img src="~/images/ludek2.jpg" alt="Zdjęcie Profilowe">
 				<h4>@Model.Imie @Model.Nazwisko</h4>
 				<p><b>Płeć:</b> Mężczyzna</p>
 				<p><b>Telefon:</b>@Model.Telefon</p>
@@ -118,10 +118,12 @@
                     </select>
                 </div>
 
-                <button id="update">Wyślij</button>
+                <button class="btn btn-outline-success" id="update">Wyślij</button>
+                <button class="btn btn-outline-success" id="del">Usuń konto</button>
 
                 <script>
                     document.getElementById("update").onclick = function () { update() };
+                    document.getElementById("del").onclick = function () { del() };
                     function update() {
 
         $.ajax({

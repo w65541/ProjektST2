@@ -58,8 +58,8 @@ namespace Storage.Controllers
                 int temp2 = temp.First().IdUser;
                 _context.Rejections.RemoveRange(_context.Rejections.Where(x=>x.Rejectee==temp.First().Id).ToList());
                 _context.Profils.Remove(temp.First());
-                _context.Users.Remove(_context.Users.Where(x=>x.Id==temp2).ToList().First());  
-            
+                _context.Users.Remove(_context.Users.Where(x=>x.Id==temp2).ToList().First());
+                _context.SaveChanges();
             return 0;
             }
             return 1;
@@ -105,8 +105,8 @@ namespace Storage.Controllers
         }
 
 
-        [HttpPost("Reject")]
-        public int reject(int id1, int id2) {
+        [HttpGet("Reject")]
+        public int Reject(int id1, int id2) {
             _context.Rejections.Add(new Rejection{Rejectee=id1,Rejected=id2});
             _context.SaveChanges();
             return 0;
@@ -127,7 +127,6 @@ namespace Storage.Controllers
                 profile.Add(new Models.ratedProfile(item, i));
             }
             profile=profile.OrderBy(x => x.ocena).ToList();
-            Console.WriteLine("dupa "+profile[0].ocena);
             return profile.Select(x=>x.profil).ToList();
         }
 
