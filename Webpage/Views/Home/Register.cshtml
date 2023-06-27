@@ -102,7 +102,6 @@
                         
         $.ajax({
             type: "GET", dataType: 'json',
-            //url: 'http://localhost:38061/DatingSite/Profile/Get?id=1',
             url:'@Url.Action("ProfileAdd", "DatingSite")',
             data: {
                 login: document.getElementById("login").value, haslo: document.getElementById("newPassword").value,  imie: document.getElementById("firstName").value,
@@ -111,12 +110,10 @@
             },
 
             success: function () {
-                //do something with result here
                 window.location = '@Url.Action("Login", "Home")';
-                //location.reload();
             },
         error: function () {
-                // Obsługa błędów
+               
             }
         });
     }

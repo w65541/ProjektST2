@@ -35,12 +35,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="login">login:</label>
                     <input type="text" class="form-control" id="login" name="login">
                 </div>
 
                 <div class="form-group">
-                    <label> Aktualne hasło: </label><br />
                     <label for="newPassword">Nowe hasło:</label>
                     <input type="password" class="form-control" id="newPassword" name="newPassword">
                 </div>
@@ -52,16 +50,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label> Aktualne nazwisko:</label><br />
+                    <label> Aktualne nazwisko: @Model.Nazwisko</label><br />
                     <label for="lastName">Nazwisko:</label>
                     <input type="text" class="form-control" id="lastName" name="lastName">
                 </div>
                 <div class="form-group">
+                    <label> Aktualne telefon: @Model.Telefon</label><br />
                     <label for="telefon">telefon:</label>
                     <input type="text" class="form-control" id="telefon" name="telefon" required>
                 </div>
                 <div class="form-group">
-                    <label> Aktualna płeć:</label><br />
                     <label for="gender">Płeć:</label>
                     <select class="form-control" id="gender" name="gender">
                         <option value="2" selected>Wybierz...</option>
@@ -78,6 +76,7 @@
                 <hr />
 
                 <div class="form-group">
+                    <label> Aktualny atrybut: @Model.Atrybut1</label><br />
                     <label for="a1">Ocena:</label>
                     <select class="form-control" id="a1" name="rating">
                         <option value="0" selected>Wybierz...</option>
@@ -89,6 +88,7 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label> Aktualny atrybut: @Model.Atrybut2</label><br />
                     <label for="a2">Ocena:</label>
                     <select class="form-control" id="a2" name="rating">
                         <option value="0" selected>Wybierz...</option>
@@ -100,6 +100,7 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label> Aktualny atrybut: @Model.Atrybut3</label><br />
                     <label for="a3">Ocena:</label>
                     <select class="form-control" id="a3" name="rating">
                         <option value="0" selected>Wybierz...</option>
@@ -111,6 +112,7 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label> Aktualny atrybut: @Model.Atrybut4</label><br />
                     <label for="a4">Ocena:</label>
                     <select class="form-control" id="a4" name="rating">
                         <option value="0" selected>Wybierz...</option>
